@@ -1,0 +1,16 @@
+{% if versions %}
+<div class="select">
+    <select hx-include="[name='project'], [name='version'], [name='product']" name="version" x-model="version"
+        id="versions_list">
+        <option value="">Select version...</option>
+        {% for version in versions %}
+        {% include 'version/partials/version.html' %}
+        {% endfor %}
+    </select>
+</div>
+{% else %}
+<div class="select" style="display: none;">
+    <select hx-include="[name='project'], [name='version'], [name='product']" name="version">
+    </select>
+</div>
+{% endif %}

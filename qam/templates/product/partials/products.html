@@ -1,0 +1,50 @@
+<div id="products">
+    <div class="block container">
+        {% include 'messages.html' %}
+        <h3 class="title is-4">Products</h3>
+        <div class="columns">
+            <div class="column is-9">
+                <div class="block control has-icons-right">
+                    <input class="input" type="search" name="search" placeholder="Search by name"
+                        hx-get="{% url 'products' %}" hx-trigger="input changed delay:500ms, search"
+                        hx-target="#products-tbody" hx-swap="innerHTML" hx-include="[name='project_filter']">
+                    <span class="icon is-small is-right">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="column auto">
+                <div class="select control" hx-get="{% url 'get_project_dropdown_options' %}" hx-target="this"
+                    hx-trigger="load" hx-swap="innerHTML" hx-vals='{"is_products_filter": "True"}'>
+                    <select name="project" required>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <form id="addProductForm" class="form block" hx-post="{% url 'add_product' %}" hx-target="#products"
+            hx-swap="innerHTML swap:1s">
+            <div class="field is-grouped">
+                <p class="control is-expanded">
+                    <input hx-post="{% url 'check_product_name' %}" hx-swap="outeHTML" hx-trigger="keyup changed"
+                        hx-target="#product-name-error" class="input" name="name" type="text" placeholder="Name..."
+                        required>
+                </p>
+                <div class="select control" hx-get="{% url 'get_project_dropdown_options' %}" hx-target="this"
+                    hx-trigger="load" hx-swap="innerHTML">
+                    <select name="project" required>
+                        <option></option>
+                    </select>
+                </div>
+                <p class="control">
+                    <button class="button is-success is-rounded">
+                        +
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="block container">
+        {% include 'product/partials/products_table.html' %}
+    </div>
+</div>

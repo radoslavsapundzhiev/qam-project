@@ -1,0 +1,14 @@
+<select
+    {% if is_versions_page %}
+        hx-get="{% url 'versions' %}"
+        hx-target="#versions-tbody"
+        hx-trigger="change"
+        hx-swap="innerHTML"
+    {% endif %}
+    name="product"
+>
+    <option value="">Select product...</option>
+    {% for product in products %}
+    {% include 'product/partials/product_option.html' %}
+    {% endfor %}
+</select>

@@ -1,0 +1,13 @@
+{% if '/qam/projects/' in request.path %}
+{% for product in project.product_set.all %}
+
+{% include 'product/partials/product_row.html' %}
+
+{% endfor %}
+{% else %}
+{% for product in page_obj %}
+
+{% include 'product/partials/product_row.html' %}
+
+{% endfor %}
+{% endif %}

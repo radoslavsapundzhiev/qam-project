@@ -1,0 +1,27 @@
+#addReportForm {
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0 0 0;
+}
+
+#addCaseForm {
+    width: 50%;
+    margin: auto;
+}
+
+.navbar-end .buttons,
+.navbar-end .buttons .button {
+    margin-left: 2rem;
+}
+
+.pagination .page-links {
+    margin: auto;
+}
+
+.active {
+    color: #fff;
+    background-color: #00d1b2;
+    border-color: transparent;
+    border-radius: 0.3rem;
+}

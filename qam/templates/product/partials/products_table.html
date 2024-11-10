@@ -1,0 +1,51 @@
+{% if '/qam/projects/' in request.path %}
+{% if project.product_set.count > 0 %}
+
+<div class="block" id="product-name-error"></div>
+<table class="table is-striped is-fullwidth">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Project Name</th>
+        <th>Versions</th>
+        <th>Cases</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody id="products-tbody">
+        {% include 'product/partials/products_tbody.html' %}
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>There are no products in the database.</p>
+
+{% endif %}
+{% else %}
+{% if page_obj %}
+
+<div class="block" id="product-name-error"></div>
+<table class="table is-striped is-fullwidth">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Project Name</th>
+        <th>Versions</th>
+        <th>Cases</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody id="products-tbody">
+        {% include 'product/partials/products_tbody.html' %}
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>There are no products in the database.</p>
+
+{% endif %}
+{% endif %}

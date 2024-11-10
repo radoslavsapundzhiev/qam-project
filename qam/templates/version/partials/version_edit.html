@@ -1,0 +1,30 @@
+<tr>
+    <td>
+        <form class="form" hx-post="{% url 'update_version' version.id %}" hx-target="closest tr" hx-swap="outerHTML">
+            <div class="columns">
+                <div class="column is-8">
+                    <input type="text" class="input" name="name" value="{{ version.name }}" required>
+                </div>
+                <div class="column is-3">
+                    <div class="select" hx-get="{% url 'get_product_dropdown_options' %}" hx-target="this"
+                        hx-trigger="load" hx-swap="innerHTML" hx-vals='{"version_id": {{ version.id }}}'>
+                        <select name="product" required>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="column is-1">
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link is-small" type="submit">Submit</button>
+                        </div>
+                        <div class="control">
+                            <button hx-get="{% url 'get_version' version.id %}" hx-target="closest tr"
+                                hx-swap="outerHTML" class="button is-link is-small" type="submit">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </td>
+</tr>

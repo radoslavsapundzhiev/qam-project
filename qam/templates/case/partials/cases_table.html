@@ -1,0 +1,26 @@
+{% if page_obj %}
+
+<table class="table is-striped is-fullwidth">
+    <thead>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Project</th>
+        <th>Description</th>
+        <th>Expected Result</th>
+        <th>Init Conf</th>
+        <th>Products</th>
+        <th>Reports</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody id="cases-tbody">
+        {% include 'case/partials/cases_tbody.html' %}
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>There are no cases in the database.</p>
+
+{% endif %}

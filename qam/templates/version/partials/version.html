@@ -1,0 +1,5 @@
+{% if version_id and version.id == version_id %}
+<option value="{{ version.id }}" selected>{{ version.name }}</option>
+{% else %}
+<option value="{{ version.id }}">{{ version.name }}</option>
+{% endif %}

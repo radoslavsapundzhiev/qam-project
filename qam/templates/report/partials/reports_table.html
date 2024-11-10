@@ -1,0 +1,32 @@
+{% include 'messages.html' %}
+
+{% if reports %}
+
+<div id="reports">
+    <div class="block" id="report-name-error"></div>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+            <th>Result</th>
+            <th>Case Name</th>
+            <th>Case Number</th>
+            <th>Version</th>
+            <th>Created at</th>
+            <th>Actions</th>
+        </thead>
+
+        <tbody id="reports-tbody">
+
+            {% include 'report/partials/reports_tbody.html' %}
+
+        </tbody>
+
+    </table>
+    <button class="button is-info" hx-get="{% url 'clear' %}" hx-target="#reports_{{ case_id }}">hide</button>
+</div>
+
+{% else %}
+<div id="reports">
+    <p>There are no any reports for this case and version in the database.</p>
+    <button class="button is-info" hx-get="{% url 'clear' %}" hx-target="#reports_{{ case_id }}">hide</button>
+</div>
+{% endif %}

@@ -1,0 +1,15 @@
+{% if messages %}
+<div class="block" hx-get="{% url 'clear' %}" hx-trigger="load delay:3s">
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <div class="notification is-success">
+        {{ message }}
+    </div>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <div class="notification is-danger">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}

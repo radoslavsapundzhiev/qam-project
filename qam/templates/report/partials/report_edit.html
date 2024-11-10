@@ -1,0 +1,50 @@
+<tr>
+    <td></td>
+    <td></td>
+    <td>
+        <form id="editReportForm" class="form block" hx-post="{% url 'update_report' report.id %}" hx-target="closest tr"
+            hx-swap="outerHTML">
+            <div class="field">
+                <label class="label">Result</label>
+                <div class="select control">
+                    <select name="result">
+                        {% for option in options %}
+                            <option 
+                                value="{{ option.0 }}"
+                                {% if option.0 == report.result %}
+                                selected
+                                {% endif %}
+                            >
+                                {{ option.1 }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Fail Reason</label>
+                <div class="control">
+                    <input class="input" name="fail_reason" type="text" value="{{ report.fail_reason}}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Fail Location</label>
+                <div class="control">
+                    <input class="input" name="fail_location" type="text" value="{{ report.fail_location}}">
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-info is-small">Edit</button>
+                </div>
+                <div class="control">
+                    <button hx-get="{% url 'get_report' report.id %}" hx-target="closest tr" hx-swap="outerHTML"
+                        class="button is-link is-small" type="submit">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>

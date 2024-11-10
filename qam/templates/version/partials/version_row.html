@@ -1,0 +1,27 @@
+{% if forloop.last and page_obj.paginator.num_pages > page_obj.number %}
+<tr 
+    hx-get="{% url 'versions' %}?page={{ page_obj.number|add:1 }}"
+    hx-trigger="revealed" 
+    hx-swap="afterend"
+    hx-target="this"
+>
+{% else %}
+<tr>
+{% endif %}
+    <td>
+        <a href="{{ version.get_absolute_url }}">
+            {{ version.id }}
+        </a>
+    </td>
+    <td>{{ version.name }}</td>
+    <td>{{ version.product.project.name }}</td>
+    <td>{{ version.product.name }}</td>
+    <td>{{ version.report_set.count }}</td>
+    <td>
+        <button hx-get="{% url 'get_edit_version' version.id %}" hx-target="closest tr" hx-swap="outerHTML" title="edit"
+            class="button is-warning is-small is-rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button hx-confirm="Are you sure? Deleting this version will delete all related reports!"
+            hx-delete="{% url 'delete_version' version.id %}" hx-target="closest tr" hx-swap="outerHTML swap:1s"
+            title="delete" class="button is-danger is-small is-rounded"><i class="fa-solid fa-trash"></i></button>
+    </td>
+</tr>
