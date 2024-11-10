@@ -1,0 +1,81 @@
+<div id="cases">
+    <div class="block container" x-data="{ open: false }">
+        {% include 'messages.html' %}
+        <h4 class="title is-4">Cases</h4>
+        <div class="block control has-icons-right">
+            <input class="input" type="search" name="search" placeholder="Search by case number"
+                hx-get="{% url 'cases' %}" hx-trigger="input changed delay:500ms, search" hx-target="#cases-tbody"
+                hx-swap="innerHTML">
+            <span class="icon is-small is-right">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+        </div>
+        <span class="button is-success is-rounded" @click="open = !open">+</span>
+        <form id="addCaseForm" class="form block" hx-post="{% url 'add_case' %}" hx-target="#cases"
+            hx-swap="innerHTML swap:1s" x-show="open">
+            <div class="field">
+                <label class="label">Case Number</label>
+                <div class="control">
+                    <input hx-post="{% url 'check_case_number' %}" hx-swap="outeHTML" hx-trigger="keyup changed"
+                        hx-target="#case-number-error" class="input" name="case_number" type="text"
+                        placeholder="Case Number..." required>
+                </div>
+                <div class="block" id="case-number-error"></div>
+            </div>
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" placeholder="Name..." required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea" name="description" placeholder="Description..." rows="2"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Expected result</label>
+                <div class="control">
+                    <input class="input" name="expected_result" type="text" placeholder="Expected result...">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Init Conf</label>
+                <div class="control">
+                    <textarea class="textarea" name="init_conf" placeholder="Init Conf..." rows="2"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Projects</label>
+                <div class="control">
+                    <div class="select" id="projects" hx-get="{% url 'get_project_dropdown_options' %}"
+                        hx-trigger="load" hx-target="this" hx-swap="innerHTML" hx-vals='{"is_add_case": "True"}'>
+                        <select>
+                            <option>Projects...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Products</label>
+                <div class="control">
+                    <div class="select is-multiple" hx-get="{% url 'get_products_multi_select_options' %}"
+                        hx-target="this" hx-trigger="load" hx-swap="innerHTML">
+                        <select multiple size="3" name="products">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-info">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="block container">
+        {% include 'case/partials/cases_table.html' %}
+    </div>
+</div>

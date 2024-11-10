@@ -1,0 +1,19 @@
+{% if forloop.last and page_obj.paginator.num_pages > page_obj.number %}
+<tr hx-get="{% url 'projects' %}?page={{ page_obj.number|add:1 }}" hx-trigger="revealed" hx-swap="afterend"
+    hx-target="this" hx-include="[name='search']">
+    {% else %}
+<tr>
+    {% endif %}
+    <td>
+        <a href="{{ project.get_absolute_url }}">
+            {{ project.id }}
+        </a>
+    </td>
+    <td>{{ project.name }}</td>
+    <td>{{ project.product_set.count }}</td>
+    <td>{{ project.get_cases.count }}</td>
+    <td>
+        <button hx-get="{% url 'get_edit_project' project.id %}" hx-target="closest tr" hx-swap="outerHTML" title="edit"
+            class="button is-warning is-small is-rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+    </td>
+</tr>

@@ -1,0 +1,17 @@
+{% if products %}
+<div class="select">
+    <select hx-get="{% url 'get_cases' %}" hx-trigger="change" hx-target="#content" hx-swap="innerHTML"
+        hx-include="[name='project'], [name='product'], [name='version']" name="product">
+        <option value="">Select product...</option>
+        {% for product in products %}
+        {% include 'product/partials/product_option.html' %}
+        {% endfor %}
+    </select>
+</div>
+{% else %}
+<div class="select" style="display: none;">
+    <select hx-get="{% url 'get_cases' %}" hx-trigger="change" hx-target="#content" hx-swap="innerHTML"
+        hx-include="[name='project'], [name='product'], [name='version']" name="product">
+    </select>
+</div>
+{% endif %}

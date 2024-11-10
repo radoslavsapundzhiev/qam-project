@@ -1,0 +1,45 @@
+<div id="versions">
+    <div class="block container">
+        {% include 'messages.html' %}
+        <h3 class="title is-4">Versions</h3>
+        <div class="columns">
+            <div class="column is-6">
+                <div class="select control" hx-get="{% url 'get_project_dropdown_options' %}" hx-target="this"
+                    hx-trigger="load" hx-swap="innerHTML" hx-vals='{"is_versions_page": "True"}'>
+                    <select name="project">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="select control" id="products-select-options">
+                    <select name="product">
+                        <option>Products...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <form id="addVersionForm" class="form block" hx-post="{% url 'add_version' %}" hx-target="#versions"
+            hx-swap="innerHTML swap:1s">
+            <div class="field is-grouped">
+                <p class="control is-expanded">
+                    <input class="input" name="name" type="text" placeholder="Name..." required>
+                </p>
+                <div class="select control" hx-get="{% url 'get_product_dropdown_options' %}" hx-target="this"
+                    hx-trigger="load" hx-swap="innerHTML">
+                    <select name="product" required>
+                        <option></option>
+                    </select>
+                </div>
+                <p class="control">
+                    <button class="button is-success is-rounded">
+                        +
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="block container">
+        {% include 'version/partials/versions_table.html' %}
+    </div>
+</div>

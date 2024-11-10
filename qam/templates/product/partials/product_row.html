@@ -1,0 +1,43 @@
+{% if forloop.last and page_obj.paginator.num_pages > page_obj.number %}
+<tr>
+    <td>{{ product.id }}</td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.project.name }}</td>
+    <td>{{ product.version_set.count }}</td>
+    <td>{{ product.case_set.count }}</td>
+    <td>
+        <button hx-get="{% url 'get_edit_product' product.id %}" hx-target="closest tr" hx-swap="outerHTML" title="edit"
+            class="button is-warning is-small is-rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+    </td>
+</tr>
+<tr id="more-products">
+    <td></td>
+    <td></td>
+    <td>
+        <button 
+            class="button is-primary"
+            hx-get="{% url 'products' %}?page={{ page_obj.number|add:1 }}"
+            hx-swap="outerHTML"
+            hx-target="#more-products"
+            hx-include="[name='search'], [name='project_filter']"
+        >
+            Load More Products...
+        </button>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+{% else %}
+<tr>
+    <td>{{ product.id }}</td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.project.name }}</td>
+    <td>{{ product.version_set.count }}</td>
+    <td>{{ product.case_set.count }}</td>
+    <td>
+        <button hx-get="{% url 'get_edit_product' product.id %}" hx-target="closest tr" hx-swap="outerHTML" title="edit"
+            class="button is-warning is-small is-rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+    </td>
+</tr>
+{% endif %}

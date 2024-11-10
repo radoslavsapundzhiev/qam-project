@@ -1,0 +1,5 @@
+{% if product_id and product.id == product_id or case_products and product.id in case_products %}
+<option value="{{ product.id }}" selected>{{ product.name }}</option>
+{% else %}
+<option value="{{ product.id }}">{{ product.name }}</option>
+{% endif %}

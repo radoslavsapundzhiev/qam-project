@@ -1,0 +1,15 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 class="title is-4 block">Details: </h4>
+    <p class="subtitle"><strong>ID: </strong>{{ project.id }}</p>
+    <p class="subtitle"><strong>Name: </strong>{{ project.name }}</p>
+    <h4 class="title is-4 block">Products: {{ project.product_set.count }}</h4>
+    {% include 'product/partials/products_table.html' %}
+</div>
+{% endblock %}

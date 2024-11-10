@@ -1,0 +1,98 @@
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <form id="editCaseForm" class="form block" hx-post="{% url 'update_case' case.id %}" hx-target="closest tr"
+            hx-swap="outerHTML">
+            <div class="field">
+                <label class="label">Case Number</label>
+                <div class="control">
+                    <input class="input" name="case_number" type="text" value="{{ case.case_number }}" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" name="name" type="text" value="{{ case.name }}" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea" name="description" rows="2">{{ case.description }}</textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Expected result</label>
+                <div class="control">
+                    <input class="input" name="expected_result" type="text" value="{{ case.expected_result }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Init Conf</label>
+                <div class="control">
+                    <textarea class="textarea" name="init_conf" placeholder="Init Conf..."
+                        rows="2">{{ case.init_conf }}</textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Projects</label>
+                <div class="control">
+                    <div 
+                        class="select" 
+                        id="projects" 
+                        hx-get="{% url 'get_project_dropdown_options' %}"
+                        hx-trigger="load" 
+                        hx-target="this" 
+                        hx-swap="innerHTML"
+                        {% if case.get_project is not None %}
+                            hx-vals='{"is_edit_case": "True", "project_id": {{ case.get_project.id }}}'
+                        {% else %}
+                            hx-vals='{"is_edit_case": "True"}'
+                        {% endif %}
+                    >
+                        <select>
+                            <option>Projects...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Products</label>
+                <div class="control">
+                    <div 
+                        class="select is-multiple" 
+                        hx-get="{% url 'get_products_multi_select_options' %}"
+                        hx-target="this" 
+                        hx-trigger="load" 
+                        hx-swap="innerHTML"
+                        {% if case.get_project is not None %}
+                            hx-vals='{"project": {{ case.get_project.id }}, "case": {{ case.id }}}'
+                        {% else %}
+                            hx-vals='{"case": {{ case.id }}}'
+                        {% endif %}
+                    >
+                        <select multiple size="3" name="products">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-info is-small">Edit</button>
+                </div>
+                <div class="control">
+                    <button hx-get="{% url 'get_case' case.id %}" hx-target="closest tr" hx-swap="outerHTML"
+                        class="button is-link is-small" type="submit">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>

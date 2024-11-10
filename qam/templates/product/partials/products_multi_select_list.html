@@ -1,0 +1,5 @@
+<select multiple size="3" name="products">
+    {% for product in products %}
+    {% include 'product/partials/product_option.html' %}
+    {% endfor %}
+</select>

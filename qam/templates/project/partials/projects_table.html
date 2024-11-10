@@ -1,0 +1,23 @@
+{% if page_obj %}
+
+<div class="block" id="project-name-error"></div>
+<table class="table is-striped is-fullwidth">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Number of products</th>
+        <th>Number of cases</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody id="projects-tbody">
+        {% include 'project/partials/projects_tbody.html' %}
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>There are no projects in the database.</p>
+
+{% endif %}

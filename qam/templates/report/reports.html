@@ -1,0 +1,48 @@
+<div class="block container" x-data="{ open: false }">
+    {% include 'messages.html' %}
+    <h5 class="title is-5">Reports</h5><span class="button is-success is-rounded" @click="open = !open">+</span>
+    <form 
+        id="addReportForm" 
+        class="form block" 
+        hx-post="{% url 'add_report' %}" 
+        hx-target="#reports"
+        hx-swap="innerHTML swap:1s"
+        hx-include="[name='version'], [name='case']"
+        x-show="open"
+    >
+        <div class="field">
+            <label class="label">Result</label>
+            <div class="select control">
+                <select name="result">
+                    {% for option in options %}
+                    <option value="{{ option.0 }}">
+                        {{ option.1 }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Fail Reason</label>
+            <div class="control">
+                <input class="input" name="fail_reason" type="text" placeholder="Fail Reason...">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Fail Location</label>
+            <div class="control">
+                <input class="input" name="fail_location" type="text" placeholder="Fail Location...">
+            </div>
+        </div>
+        <input type="hidden" name="case" value="{{ case_id }}">
+        <input type="hidden" name="version" value="{{ version_id }}">
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-info">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="block container">
+    {% include 'report/partials/reports_table.html' %}
+</div>

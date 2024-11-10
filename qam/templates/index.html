@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+{% block project_dropdown %}
+<div class="select" id="projects" hx-get="{% url 'get_project_dropdown_options' %}" hx-trigger="load" hx-target="this"
+    hx-swap="innerHTML" hx-vals='{"is_index_page": "True"}'>
+    <select>
+        <option>Projects...</option>
+    </select>
+</div>
+{% endblock %}
+{% block product_dropdown %}
+{% include 'product/partials/products_select_list.html' %}
+{% endblock %}
+{% block version_dropdown %}
+{% include 'version/partials/versions_list.html' %}
+{% endblock %}
+{% block content %}
+<div class="block container">
+    <div class="columns">
+        <div class="column is-3">
+            <h4 class="title is-4">Projects</h4>
+            {% if all_projects %}
+            <p><strong>Projects count: </strong>{{ all_projects.count }}</p>
+            {% endif %}
+        </div>
+        <div class="column is-3">
+            <h4 class="title is-4">Products</h4>
+            {% if all_products %}
+            <p><strong>Product count: </strong>{{ all_products.count }}</p>
+            {% endif %}
+        </div>
+        <div class="column is-3">
+            <h4 class="title is-4">Cases</h4>
+            {% if all_cases %}
+            <p><strong>Cases count: </strong>{{ all_cases.count }}</p>
+            {% endif %}
+        </div>
+        <div class="column is-3">
+            <h4 class="title is-4">Reports</h4>
+            {% if all_reports %}
+            <p><strong>Reports count: </strong>{{ all_reports.count }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

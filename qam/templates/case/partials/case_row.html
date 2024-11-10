@@ -1,0 +1,53 @@
+{% if forloop.last and page_obj.paginator.num_pages > page_obj.number %}
+<tr>
+    <td>{{ case.case_number }}</td>
+    <td>{{ case.name }}</td>
+    <td>{% if case.get_project is not None %}{{ case.get_project.name }}{% endif %}</td>
+    <td>{% if case.description %}{{ case.description|slice:":5"|add:"..." }}{% endif %}</td>
+    <td>{% if case.expected_result %}{{ case.expected_result }}{% endif %}</td>
+    <td>{{ case.init_conf }}</td>
+    <td>{{ case.products.count }}</td>
+    <td>{{ case.report_set.count }}</td>
+    <td>
+        <button hx-get="{% url 'get_edit_case' case.id %}" hx-target="closest tr" hx-swap="outerHTML" title="edit"
+            class="button is-warning is-small is-rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button hx-confirm="Are you sure? Deleting this case will delete all related reports!"
+            hx-delete="{% url 'delete_case' case.id %}" hx-target="closest tr" hx-swap="outerHTML swap:1s"
+            title="delete" class="button is-danger is-small is-rounded"><i class="fa-solid fa-trash"></i></button>
+    </td>
+</tr>
+<tr id="more-cases">
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <button class="button is-primary" hx-get="{% url 'cases' %}?page={{ page_obj.number|add:1 }}"
+            hx-swap="outerHTML" hx-target="#more-cases" hx-include="[name='search']">
+            Load More Cases...
+        </button>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+{% else %}
+<tr>
+    <td>{{ case.case_number }}</td>
+    <td>{{ case.name }}</td>
+    <td>{% if case.get_project is not None %}{{ case.get_project.name }}{% endif %}</td>
+    <td>{% if case.description %}{{ case.description|slice:":5"|add:"..." }}{% endif %}</td>
+    <td>{% if case.expected_result %}{{ case.expected_result }}{% endif %}</td>
+    <td>{{ case.init_conf }}</td>
+    <td>{{ case.products.count }}</td>
+    <td>{{ case.report_set.count }}</td>
+    <td>
+        <button hx-get="{% url 'get_edit_case' case.id %}" hx-target="closest tr" hx-swap="outerHTML" title="edit"
+            class="button is-warning is-small is-rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button hx-confirm="Are you sure? Deleting this case will delete all related reports!"
+            hx-delete="{% url 'delete_case' case.id %}" hx-target="closest tr" hx-swap="outerHTML swap:1s"
+            title="delete" class="button is-danger is-small is-rounded"><i class="fa-solid fa-trash"></i></button>
+    </td>
+</tr>
+{% endif %}

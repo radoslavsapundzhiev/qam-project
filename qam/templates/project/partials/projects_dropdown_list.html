@@ -1,0 +1,38 @@
+<select 
+    {% if is_add_case %} 
+        hx-get="{% url 'get_products_multi_select_options' %}" 
+        x-trigger="change"
+        hx-target="select[name='products']" 
+        hx-swap="outerHTML" 
+    {% elif is_index_page %} 
+        hx-get="{% url 'get_cases' %}"
+        hx-trigger="change" 
+        hx-target="#content" 
+        hx-swap="innerHTML" 
+        hx-include="[name='product'], [name='version']"
+    {% elif is_edit_case %}
+        hx-get="{% url 'get_products_multi_select_options' %}" 
+        x-trigger="change"
+        hx-target="next select[name='products']" 
+        hx-swap="outerHTML"
+    {% elif is_products_filter %}
+        hx-get="{% url 'products' %}" 
+        x-trigger="change"
+        hx-target="#products-tbody" 
+        hx-swap="innerHTML"
+        hx-include="[name='search']"
+        name="project_filter"
+    {% elif is_versions_page %}
+        hx-get="{% url 'get_product_dropdown_options' %}"
+        hx-trigger="change"
+        hx-target="#products-select-options"
+        hx-swap="innerHTML"
+        name="project"
+    {% endif %} 
+        name="project"
+>
+    <option value="">Select project...</option>
+    {% for project in projects %}
+    {% include 'project/partials/project_option.html' %}
+    {% endfor %}
+</select>

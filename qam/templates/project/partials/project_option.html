@@ -1,0 +1,5 @@
+{% if project.id == project_id %}
+<option value="{{ project.id }}" selected>{{ project.name }}</option>
+{% else %}
+<option value="{{ project.id }}">{{ project.name }}</option>
+{% endif %}

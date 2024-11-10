@@ -1,0 +1,31 @@
+<div id="projects">
+    <div class="block container">
+        {% include 'messages.html' %}
+        <h3 class="title is-4">Projects</h3>
+        <div class="block control has-icons-right">
+            <input class="input" type="search" name="search" placeholder="Search by name" hx-get="{% url 'projects' %}"
+                hx-trigger="input changed delay:500ms, search" hx-target="#projects-tbody" hx-swap="innerHTML">
+            <span class="icon is-small is-right">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+        </div>
+        <form id="addProjectForm" class="form block" hx-post="{% url 'add_project' %}" hx-target="#projects"
+            hx-swap="innerHTML swap:1s">
+            <div class="field is-grouped">
+                <p class="control is-expanded">
+                    <input hx-post="{% url 'check_project_name' %}" hx-swap="outeHTML" hx-trigger="keyup changed"
+                        hx-target="#project-name-error" class="input" name="name" type="text" placeholder="Name..."
+                        required>
+                </p>
+                <p class="control">
+                    <button class="button is-success is-rounded">
+                        +
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="block container">
+        {% include 'project/partials/projects_table.html' %}
+    </div>
+</div>

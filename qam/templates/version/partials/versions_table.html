@@ -1,0 +1,24 @@
+{% if page_obj %}
+
+<div class="block" id="version-name-error"></div>
+<table class="table is-striped is-fullwidth">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Project</th>
+        <th>Product</th>
+        <th>Reports</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody id="versions-tbody">
+        {% include 'version/partials/versions_tbody.html' %}
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>There are no versions in the database.</p>
+
+{% endif %}
